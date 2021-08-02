@@ -1,0 +1,155 @@
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+@font-face {
+    font-family:"GSG";
+    src: url("../font/GenShinGothic-Regular.ttf") /* TTF file for CSS3 browsers */
+    /*src: url("../font/GenShinGothic-Light.ttf")*/
+}
+
+body{
+  font-family: "GSG";  
+}
+
+button{
+  font-family: "GSG";
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+input[type="text"]{
+  border: 0; padding: 7px 0; border-bottom: 1px solid #ccc;
+  font-family: "GSG";
+  font-size: 14px;
+  text-align: center;
+  margin-right: 10px; 
+  background: None;
+}
+:focus{outline: none;}
+
+input[type="color"]{
+  border: 0; border-bottom: 1px solid #ccc;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    color: #000000;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.fixednav {position: fixed;top: 0;z-index: 265;width: 100%;opacity: .95;}
+
+#header{
+text-align: center;
+}
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 140px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color:#AAAAAA;
+    cursor: pointer;
+    font-size: 14px;
+    line-height:60%
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.iconText{
+  font-size: 18px;
+}

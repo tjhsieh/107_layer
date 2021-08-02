@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html style="width: 100%;">
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>SVG Pattern Editor</title>
+</head>
+
+<!--<link rel="stylesheet" href="./lib/bootstrap.min.css">-->
+<link rel="stylesheet" type="text/css" href="./src/editorCSS.css">
+
+<body id="ediotrBody"  style="background-color: #DFDFDF;">
+    <header style="background-color: #444444; height:150px; color: #FFFFFF; border-radius: 5px; margin:0; position: relative; top: -22px; left:0px; ">
+		<h1 id="editorTitle" style="text-align: center; background-color: #888888;">SVG Pattern Editor</h1>
+		<h3 style="padding-left: 10px; margin-top: -40px;">			
+			<table>
+			　<tr>
+				<td align="center">
+					<button  class="dropbtn" id="saveUI" onclick="dropdownMenuShow('saveUIDropDown')" style="background-image:url(./img/iconSave.svg); width:50px;height:50px;"></button>
+					<h3 class="iconText" style="margin-top: -5px">檔案</h3>
+					<div id="saveUIDropDown" class="dropdown-content" style="margin-top: -10px;">
+					    <a onclick="saveSPE()" style="border-style: solid; border-width: 1px; border-color:#AAAAAA;cursor: pointer;" >儲存SPE</a>
+					    <a onclick="exportSVG()" style="border-style: solid; border-width: 1px; border-color:#AAAAAA;cursor: pointer;"style="border-style: solid; border-width: 1px; border-color:#AAAAAA;">儲存SVG</a>
+					    <a style="border-style: solid; border-width: 1px; border-color:#AAAAAA;">
+					    <label class="custom-file-upload">
+						    <input type="file" onchange="loadSPE(event)"/>
+						    讀取SPE
+						</label>
+						</a>
+						<a style="border-style: solid; border-width: 1px; border-color:#AAAAAA;">
+						<label class="custom-file-upload">
+						    <input type="file" onchange="loadSVG(event)"/>
+						    匯入SVG
+						</label>
+						</a>
+						<a onclick="uiShowHide('saveUI')" style="border-style: solid; border-width: 1px; border-color:#AAAAAA;cursor: pointer;"style="border-style: solid; border-width: 1px; border-color:#AAAAAA;">重複產生輸出</a>
+					</div>
+				</td>
+				<td align="center">
+					<button  class="dropbtn" id="traceUI" onclick="dropdownMenuShow('traceUIDropDown')" style="background-image:url(./img/iconTrace.svg); width:50px;height:50px;"></button>
+					<h3 class="iconText" style="margin-top: -5px">輔助</h3>
+					<div id="traceUIDropDown" class="dropdown-content" style="margin-top: -10px;">
+						<a>
+					    <label class="custom-file-upload">
+						    <input type="file" onchange="loadSPE(event)"/>
+						    匯入描圖
+						</label>
+						</a>
+					    <a onclick="uiShowHide('traceUI')">調整描圖</a>
+						<a onclick="uiShowHide('refLineUI')">參考線設定</a>
+					</div>
+				</td>
+				<td align="center">
+					<button  class="dropbtn" id="editUI" onclick="dropdownMenuShow('editUIDropDown')" style="background-image:url(./img/iconEdit.svg); width:50px;height:50px;"></button>
+					<h3 class="iconText" style="margin-top: -5px">編輯</h3>
+					<div id="editUIDropDown" class="dropdown-content" style="margin-top: -10px;">
+					    <a onclick="uiShowHide('controlUI')">操控/繪製模式</a>
+					    <a onclick="displayVertexsConsUI()">頂點構築</a>
+						<a onclick="uiShowHide('editUI')">自由形變</a>
+						<a onclick="removeCube()">刪除圖形</a>
+						<a onclick="clearSelect()">清除選取</a>
+						<a onclick="transferToPath(nowSelected)">轉換為路徑</a>
+						<a onclick="dynaicAdjust(nowSelected)">動態調整應用</a>
+						<a onclick="copyLayer()">複製目前圖層</a>						
+					</div>
+				</td>
+				<td align="center">
+					<button  class="dropbtn" id="layerUI" onclick="dropdownMenuShow('layerUIDropDown')" style="background-image:url(./img/iconLayer.svg); width:50px;height:50px;"></button>
+					<h3 class="iconText" style="margin-top: -5px">圖層</h3>
+					<div id="layerUIDropDown" class="dropdown-content" style="margin-top: -10px;">
+					    <a onclick="uiShowHide('layerUI')">圖層操作</a>
+					    <a onclick="uiShowHide('parentUI')">父圖層操作</a>
+						<a onclick="uiShowHide('zAxisUI')">Z值操作</a>						
+					</div>
+				</td>
+			　</tr>
+			</table>
+		</h3>
+	</header>
+	<h3 id="saveLoadBlock" style="display: None;">
+		<div style="background-color: #AAAAAA; padding:10px; border-radius: 5px; margin-top: -50px; line-height:200%">
+		<text>重複產生並輸出 : </text>
+		<text>位移 X:</text><input type="text" size="5" id="repeatDrawX" value="0"></input>
+		<text> /Y:</text><input type="text" size="5" id="repeatDrawY" value="0"></input>
+		<text>輸出 Width:</text><input type="text" size="5" id="repeatDrawWidth" value="0"></input>
+		<text> /Height:</text><input type="text" size="5" id="repeatDrawHeight" value="0"></input>
+		<text>多層偏差 X:</text><input type="text" size="5" id="repeatEvenX" value="0"></input>
+		<text> / Y:</text><input type="text" size="5" id="repeatEvenY" value="0"></input>
+		<button onclick="repeatAndExportSVG()">儲存SVG檔</button>
+		</div>		
+	</h3>
+	<div style="background-color: #AAAAAA; padding:10px; border-radius: 5px; margin-top: -50px; line-height:200%">
+	<h3 id="loadTraceBlock" style="display: None">
+		<hr>
+		<text>描圖背景:</text><input accept="image/*" id="uploadImage" type="file" onchange="tracingTargetChange(this)">		
+	</h3>
+	<h3 id="traceSettingBlock" style="display: None"><!-- style="border: solid;border-width:5;background-color:#C3C3C3"-->
+		<text>描圖移動 / 調整</text><!--tT = tracing Traget : 描圖-->
+		<text>X:</text><input type="text" size="5" id="tTX" value="0"></input>
+		<text>Y:</text><input type="text" size="5" id="tTY" value="0"></input>
+		<text>Width:</text><input type="text" size="5" id="tTWidth" value="0"></input>
+		<text>Height:</text><input type="text" size="5" id="tTHeight" value="0"></input>
+		<text>Opacity:</text><input type="text" size="5" id="tTOpacity" value="0.3"></input>
+		<button id="ttApplyBtn" onclick="applyTracingTarget()">應用至描圖</button>
+		<button onclick="clearTTSet()">清除位移與變形</button>
+		<button onclick="clearTracingTarget()" >清除描圖</button>
+	</h3>
+	<h3 id="refLineSettingBlock" style="display: None"><!-- style="border: solid;border-width:5;background-color:#C3C3C3"-->
+		<text>參考線參數：</text><!--rL = reference Line : 描圖-->
+		<text> X間隔:</text><input type="text" size="5" id="rLX" value="0"></input>
+		<text> Y間隔:</text><input type="text" size="5" id="rLY" value="0"></input>
+		<text> 顏色:</text><input id="rLColor" type="color" value="#AAAAAA" />
+		<button onclick="createRefLine()" >產生參考線</button>
+		<button onclick="removeRefLine()" >移除參考線</button>
+	</h3>
+	</div>
+	<div style="background-color: #AAAAAA; border-radius: 5px;" style="display: None;">
+	<h3 id="commonFunctionBlock" style="display: None;">
+		<hr/>
+		<text>拖曳功能:</text>
+		<label class="switch">
+		  <input id="dragModeCheck" type="checkbox" onchange="switchMode(this.id)">
+		  <span class="slider"></span>
+		</label>
+		<!--<text>點擊繪製:</text><label class="switch">
+		  <input id="clickCreateModeCheck" type="checkbox" onchange="switchMode(this.id)">
+		  <span class="slider"></span>
+		</label>-->
+		<text>拖曳繪製:</text>
+		<label class="switch">
+		  <input id="paintModeCheck" type="checkbox" onchange="switchMode(this.id)">
+		  <span class="slider" value="black"></span>
+		</label>	
+	</h3>
+	<h3 id="editLineInput" style="display: None;"> <!--style="border: solid;border-width:5;background-color:#C3C3C3"-->
+		<text>Id:</text><text id="obsId" style="color: #AA0000;"></text>
+		<text>Name:</text><input type="text" size="10" id="obsName"></input><br>
+		<text>X:</text><input type="text" size="5" id="obsX"></input>
+		<text>Y:</text><input type="text" size="5" id="obsY"></input>
+		<text>Width:</text><input type="text" size="5" id="obsWidth"></input>
+		<text>Height:</text><input type="text" size="5" id="obsHeight"></input>
+		<text>Rotate:</text><input type="text" size="5" id="obsRotate" value="0"></input>
+		<text>Color:</text><input id="obsColor" type="color" value="#000000" />
+		<br>
+		<text>StrokeWidth:</text><input type="text" size="5" id="obsStrokeWidth" value="0"></input>
+		<text>StrokeColor:</text><input  id="obsStrokeColor" type="color" value="#000000" />	
+		<br>
+		<button id="obsApplyBtn" onclick="applyShapeData()">應用至圖形</button>
+		<button onclick="clearFill()" >清空圖形填滿</button>
+	</h3>	
+	<h3 id="vertexsConsUI" style="display: None">
+		<text>構築頂點數量:</text><input type="nuber" size="5" id="vertexsCons" value="3"></input>
+		<button onclick="consInputGenerate()">產生輸入</button><br>
+		<div id="consVextexsDiv">
+			<text>x1:</text><input size="5" id="vx1"></input>
+			<text>y1:</text><input size="5" id="vy1"></input>
+			<text>x2:</text><input size="5" id="vx2"></input>
+			<text>y2:</text><input size="5" id="vy2"></input>
+			<text>x3:</text><input size="5" id="vx3"></input>
+			<text>y3:</text><input size="5" id="vy3"></input>
+		</div>
+		<button onclick="consShape()">構築圖形</button><br>
+	</h3>
+	</div>
+	<div style="background-color: #AAAAAA; border-radius: 5px;">
+	<h3 id="layerLineUI" style="display: None">
+		<hr/>
+		<text>圖層序編輯 : </text>
+		<button onclick="raiseOneLayer()" >上拉一層</button>	
+		<button onclick="raiseToTop()" >拉至最上層</button>
+		<button onclick="raiseToBottom()" >拉至最下層</button>
+		<button onclick="autoChildCut()">子圖層切割</button>
+	</h3>
+	<h3 id="parentApplyLineUI" style="display: None">
+		<text>父屬性套用</text>
+		<text>X位移:</text><input type="text" size="5" id="parentX"></input>
+		<text>Y位移:</text><input type="text" size="5" id="parentY"></input>
+		<text>Width縮放(0~1):</text><input type="text" size="5" id="parentWidth"></input>
+		<text>Height縮放(0~1):</text><input type="text" size="5" id="parentHeight"></input>
+		<text>Fill套用:</text><input type="color" size="5" id="parentFill" value="#000000"></input>
+		<button onclick="parentDataApply()" >應用至所有子層集</button>
+	</h3>
+	<h3 id="parentAddLineUI" style="display: None">
+		<text>父圖層添加 : 將</text>
+		<input type="text" size="10" id="customChildLayerName"></input>
+		<button onclick="createCustomParentLayer()" >加入父圖層:</button>
+		<input type="text" size="10" id="jointoParentLayerName"></input><br>
+	</h3>
+	<h3 id="zAxisUI" style="display: None">		
+		<text>Z1:</text><input type="text" size="5" id="obsZ1"></input>
+		<text>Z2:</text><input type="text" size="5" id="obsZ2"></input>
+		<text>Z3:</text><input type="text" size="5" id="obsZ3"></input>
+		<text>Z4:</text><input type="text" size="5" id="obsZ4"></input>
+		<button onclick="zValueInput()">Z值賦予</button>
+	</h3>
+	</div>
+	<svg id="editLine" width="740" height="100" style="display: None;">
+		<rect id="editLineBG" x="0" y="0" width="740" height="100" fill="None" stroke="black" stroke-width="5"/>
+		<rect id="selectStrokeForCube" x="10" y="10" width=80 height="80" fill="None" stroke="#AA0000" stroke-width="5"/>
+		<rect id="rectCreateIcon" x="20" y="20" width="60" height="60" fill="None" stroke="black" stroke-width="5" onclick="selectShape(this.id)"/>
+		<ellipse id="circleCreateIcon" cx="130" cy="50" rx="30" ry="30" fill="None" stroke="black" stroke-width="5" onclick="selectShape(this.id)"/>
+		<path id="edgeCreateIcon" d="M200 20 L230 80" stroke="black" stroke-width="10" onclick="selectShape(this.id)"/>
+	</svg><br>
+	<div style="padding-top: 10px;">
+		<div id="divForBasicSVG"  style="display: inline;">
+		<svg id="basicSVG" width="500" height="500" x="0" y="0" style="background-color: #FFFFFF;">
+			<rect id="basicSVGBG" x="0" y="0" width="500" height="500" fill="None" stroke="black" stroke-width="5"/>
+		</svg>
+		</div>
+		<div id="divForLayerSVG" style="display: inline;">
+		<svg id="layerSVG" width="250" height="500" style="background-color: #FFFFFF;">
+		<!--<svg id="basicSVG" width="500" height="500">-->
+			<rect id="layerSVGBG" x="0" y="0" width="250" height="500" fill="None" stroke="black" stroke-width="5"/>
+			<rect id="layerTopTitle" x="0" y="0" width="250" height="50" fill="black" stroke="black" stroke-width="5" onclick="resetLayerLineViewBox()"/>
+			<text id="layerTopTitleText" x="100" y="30" fill="white" style="font-size: 25;">Layer</text>
+		</svg>
+		</div>
+		<div id="divForRelationshipSVG" style="display: inline;">
+		<svg id="relationshipSVG" width="250" height="500" style="display: None">
+		<!--<svg id="basicSVG" width="500" height="500">-->
+			<rect id="relationshipSVGBG" x="0" y="0" width="250" height="500" fill="None" stroke="black" stroke-width="5"/>
+			<rect id="relationshipTopTitle" x="0" y="0" width="250" height="50" fill="black" stroke="black" stroke-width="5" onclick="resetParentLineViewBox()"/>
+			<text id="relationshipTopTitleText" x="65" y="30" fill="white" style="font-size: 25;">Relationship</text>
+		</svg>
+		</div>
+	</div>
+	<div id="divForFakeSVG" style="display: none;">
+		<svg id="fakeSVG">
+		</svg>
+	</div>
+	<!--<script src="./lib/jquery-slim.min.js"></script>
+	<script src="./lib/popper.min.js"></script>
+	<script src="./lib/bootstrap.min.js"></script>-->
+	<script type="text/javascript" src="./lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="./lib/d3.v3.min.js"></script>	
+	<script type="text/javascript" src="./lib/dat.gui.min.js"></script>
+
+	<script type="text/javascript" src="./src/layerOperation.js"></script>
+	<script type="text/javascript" src="./src/stringOperation.js"></script>
+	<script type="text/javascript" src="./src/relationshipOperation.js"></script>
+	<script type="text/javascript" src="./src/svgEditor.js"></script>
+	<script type="text/javascript" src="./src/backgroundSetting.js"></script>
+	<script type="text/javascript" src="./src/saveAndLoad.js"></script>
+	<script type="text/javascript" src="./src/guiSupportNew.js"></script>
+	<script type="text/javascript" src="./src/dynamicSplit.js"></script>
+	<script type="text/javascript">
+		//用來讓enter的快速輸入起作用
+	document.onkeydown = checkKey;
+	function checkKey(e)
+	{//按下按鍵時觸發的
+    	//console.log(e.keyCode);//用來看到底按了什麼    
+    	e = e || window.event;
+    	if (e.keyCode === 13) 
+    	{
+    		var activeInput = document.activeElement.id;
+    		if(activeInput.indexOf("obs")!=-1)
+    		{
+    			document.getElementById("obsApplyBtn").click();
+    		}
+    		else if(activeInput.indexOf("tT")!=-1)//tT = tarcetarget
+    		{
+    			document.getElementById("ttApplyBtn").click();
+    		}    		  
+	    }
+	}
+	var canvasInfo = d3.select("#editorTitle").text() + " ( " + d3.select("#basicSVG").attr("width") + "," + d3.select("#basicSVG").attr("height") + " )"; 
+	d3.select("#editorTitle").text(canvasInfo)
+	</script>
+	<script>
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function dropdownMenuShow(id) {
+	    document.getElementById(id).classList.toggle("show");
+	}
+
+	//Close the dropdown if the user clicks other dropdown or somewhere
+	window.onclick = function(event) {
+	  	var dropdowns = document.getElementsByClassName("dropdown-content");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      var isSameNode = event.target.parentNode.isSameNode(openDropdown.parentNode);
+	      if(!isSameNode&&openDropdown.classList.contains('show'))
+		  {
+	        openDropdown.classList.remove('show');
+	      }
+	    }	  
+	}
+	</script>
+</body>
+</html>

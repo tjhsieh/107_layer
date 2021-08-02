@@ -1,0 +1,287 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>互動式向量圖形編輯</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.lp.css">
+	<link rel="stylesheet" type="text/css" href="css/landing-page.css">
+    <link href='http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+    h1 {
+        font-family: 'cwTeXFangSong';
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="http://www.cc.ntut.edu.tw/~tjhsieh/">國立臺北科技大學資訊工程系計算機圖學實驗室</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#top">回頂端</a>
+                    </li>
+					<li>
+                        <a href="#background">背景</a>
+                    </li>
+					<!-- <li>
+                        <a href="#floral_info">華文解說</a>
+                    </li> -->
+                    <li>
+                        <a href="#system">系統</a>
+                    </li>
+                  <!--   <li>
+                        <a href="#demo_download">示範與檔案下載</a>
+                    </li> -->
+					
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Header -->
+    <a name="top"></a>
+    <div class="intro-header">
+        <div class="container" style="height:350px;">
+
+            <div class="row">
+                <div class="col-lg-12" style="height:300px;">
+                    <div class="intro-message" style="position: relative;padding-top: 0%;padding-bottom: 70%;">
+                        <h1 stroke="#000000" stroke-width="2px">互動式向量圖形編輯</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Content -->
+   <!--  <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <br><br><br>
+                    <img class="img-responsive" src="img/animation.svg" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+	<a  name="demo_original"></a>
+	<div class="content-section-a">
+    <p style="text-align: right">本圖構成素材圖檔參考自<u>李誡</u> 《李明仲營造法式》，並經由系統生成</p>
+        <div class="container">
+            <hr class="section-heading-spacer">
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+
+					<h2 class="section-heading">摘要</h2>
+                    <p style="font-size: 18px">
+                        重複圖樣按一定規律排列是種常見的裝飾樣式，藉由各圖樣的重複來產生整齊劃一、結構明確的美感。可縮放向量圖形(Scalable Vector Graphics，SVG) 因其伸縮不會失真的特性，特別適合用於容易調整大小的重複圖樣生成處理。部分圖樣儘管本身為二維，但其本身結構上隱含三維結構描述，而SVG 是藉由圖層堆疊來達到部件分層的效果，難以在保持結構的狀況下兼顧編輯便利性，使用者往往須將一個個體當成多個區塊，視作個別圖層處理。因此本文提出一用於向量圖重複圖樣生成的編輯系統，且能夠透過三維值的輸入來處理結構保留、自動分層的問題，且於系統編輯完後，亦能儲存保留編輯能力的專用格式，便於再次調整。
+                    </p>
+					<!-- <a href="http://handle.ncl.edu.tw/11296/ndltd/08303295874238445930"><p class="lead">文獻來源</p></a> -->
+                </div>
+                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
+                    <img class="img-responsive" src="img/abstract1.png"  alt=""></a>
+                    <img class="img-responsive" src="img/abstract2.png"  alt=""></a>
+                    <img class="img-responsive" src="img/abstract1a.png"  alt=""></a>
+                    <img class="img-responsive" src="img/abstract2a.png"  alt=""></a>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+    
+    <a name="background"></a>
+	<div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <hr class="section-heading-spacer">
+                <div class="col-lg-5 col-sm-6">
+                    <h2 class="section-heading">《營造法式》五彩遍裝</h2>
+					<a href="color_content/index.html"><p class="lead">營造法式原文</p></a>
+                    <p>營造法式原文來自<a href="https://zh.wikisource.org/zh-hant/營造法式">維基文庫</a></p>
+                </div>
+                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
+                    <img class="img-responsive" src="img/colorful.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-section-a -->
+	
+	<!-- <a name="floral_info"></a>
+	<div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+					<h2 class="section-heading">華文解說</h2>
+                    <a href="flroal_onoff"><p class="lead">華文展示</p></a>
+                </div>
+                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
+					<br><br><br>
+                    <img class="img-responsive" src="img/introduce_header.svg" alt="">
+                </div>
+            </div>
+
+        </div>
+
+    </div> -->
+    <!-- /.content-section-a -->
+	
+	
+	<a  name="system"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+           <!-- <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <hr class="section-heading-spacer">
+                    <hr class="section-heading-spacer">
+                    <h2 class="section-heading">互動式向量圖形編輯 - 羅地龜文生成系統</h2>
+                    <p>以下圖片構成素材圖檔參考自<u>李誡</u> 《李明仲營造法式》，並經由系統生成</p>
+
+                </div>
+                <div class="col-lg-12  col-sm-12">
+                    <h4 class="text-center">範例影片</h4>
+                    <video class="img-responsive" src="./videos/luodi.mp4" controls="controls" loop/>
+                </div>
+            </div>-->
+            <div class="row">
+                <div>
+                    <hr class="section-heading-spacer">                    
+                    <h2 class="section-heading">羅地龜文</h2>
+                    <!--<a href="./system?bound=圖樣"><p class="lead">進入系統</p></a>-->
+                    <a href="./SVGLayerLoader/index_easyMode.html?name=luodi"><p class="lead">進入系統</p></a>
+                    <br>                    
+                </div>
+                <div style="display: inline-block;">
+                    <img class="img-responsive" src="./img/t.png" style="display: inline;vertical-align: middle;"></img>
+                    <video class="img-responsive" width="500" src="./videos/luodi.mp4" controls="controls" loop style="display: inline;vertical-align: middle;"></video>
+                </div>
+            </div>
+            <hr class="section-heading-spacer">
+            <div class="row">
+                <div >
+                    <!-- <hr class="section-heading-spacer"> -->
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">交腳龜文</h2>
+                    <!--<a href="./system?bound=L"><p class="lead">進入系統</p></a>-->
+                    <a href="./SVGLayerLoader/index_easyMode.html?name=jiaojiao"><p class="lead">進入系統</p></a>
+                </div>
+                <div >
+                    <img class="img-responsive" src="./img/t2.png" style="display: inline;vertical-align: middle;">
+                    <video class="img-responsive" width="500" src="./videos/jiaojiao.mp4" controls="controls" loop style="display: inline;vertical-align: middle;"></video>
+                </div>
+            </div>
+            <hr class="section-heading-spacer">
+            <div class="row">
+                <div>
+                    <!-- <hr class="section-heading-spacer"> -->
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">六出龜文</h2>
+                    <!--<a href="./system?bound=栱眼壁"><p class="lead">進入系統</p></a>-->
+                    <a href="./SVGLayerLoader/index_easyMode.html?name=liuchu"><p class="lead">進入系統</p></a>
+                </div>
+                <div>
+                    <br><br><br><br>
+                    <img class="img-responsive" src="./img/t6.png" style="display: inline;vertical-align: middle;">
+                    <video class="img-responsive" width="500" src="./videos/Liuchu.mp4" controls="controls" loop style="display: inline;vertical-align: middle;"></video>
+                </div>
+            </div>
+            <hr class="section-heading-spacer">
+            <div class="row">
+                <div>
+                    <!-- <hr class="section-heading-spacer"> -->
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">創意生成</h2>
+                    <font size="6"><a href="https://www.faburiq.com/japanese-patterns-in-menswear/"><p class="lead">Japanese Pattern</a></font><br>
+                    <table style="width:100%">
+                      <tr>
+                        <th>石畳<br>(ISHIDATAMI)</th>
+                        <th>麻の葉<br>(ASANOHA)</th>
+                        <th>青海波<br>(SEIGAIHA)</th>
+                      </tr>
+                      <tr>
+                        <td><a href="./SVGLayerLoader/index_easyMode.html?name=ISHIDATAMI"><img class="img-responsive" width="400" height="400"  src="./img/ishidatami.png"></a></td>
+                        <td><a href="./SVGLayerLoader/index_easyMode.html?name=ASANOHA"><img class="img-responsive" width="400" height="400" src="./img/asanoha.png"></a></td>
+                        <td><a href="./SVGLayerLoader/index_easyMode.html?name=SEIGAIHA"><img class="img-responsive" width="400" height="400" src="./img/seigaiha.png"></a></td>
+                      </tr>
+                    </table>
+                    <font size="6"><a href="https://ja.wikipedia.org/wiki/%E7%9A%84_(%E5%BC%93%E9%81%93)"><p class="lead">的(弓道)</a></font><br>
+                    <table style="width:100%">
+                      <tr>
+                        <td>矢絣<br>(YAGASURI)</td>
+                        <td>霞的<br>(KASUMIMATO)</td>
+                        <td>得點的<br>(TOKUTENMATO)</td>
+                      </tr>
+                      <tr>
+                        <td><a href="./SVGLayerLoader/index_easyMode.html?name=YAGASURI"><img class="img-responsive" width="500" height="500" src="./img/yagasuri.png"></a></td>
+                        <td><a href="./SVGLayerLoader/index_easyMode.html?name=KASUMIMATO"><img class="img-responsive" width="500" height="500" src="./img/kasumimato.png"></a></td>
+                        <td><a href="./SVGLayerLoader/index_easyMode.html?name=TOKUTENMATO"><img class="img-responsive" width="500" height="500" src="./img/tokutenmato.png"></a></td>
+                      </tr>
+                    </table>
+                </div>
+                <font size="6">曲水紋 - 卍字</font><br>
+                <div style="vertical-align: middle;">
+                    <img class="img-responsive" width="300" style="display: inline;vertical-align: middle;" src="./img/swastika.png" >
+                    <video class="img-responsive" width="600" style="display: inline;vertical-align: middle;" src="./videos/swastika(2.5x).mp4" controls="controls"/>
+                </div>
+            </div>
+            <hr class="section-heading-spacer">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <!-- <hr class="section-heading-spacer"> -->
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">開發模式</h2>
+                   <!-- <a href="./developer"><p class="lead">進入開發者模式</p></a>-->
+                   <a href="./system/index.html"><p class="lead">進入系統</p></a>
+                   <a href="./system/newIndex.html"><p class="lead">進入系統(選單版本)</p></a>
+                </div>
+                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
+                    <br><br>                    <br><br>
+
+                    <img class="img-responsive" height="200" src="./img/developer.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <hr class="section-heading-spacer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="copyright text-muted small"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="創用 CC 授權條款" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type"></span><br>
+			互動式向量圖形編輯，由<a xmlns:cc="http://creativecommons.org/ns#" href="http://www.cc.ntut.edu.tw/~tjhsieh/" property="cc:attributionName" rel="cc:attributionURL">國立臺北科技大學資訊工程系計算機圖學實驗室</a>製作，
+			以<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">創用CC 姓名標示-非商業性-相同方式分享 4.0 國際 授權條款</a>釋出。
+			姓名標示-非商業性-相同方式分享 CC BY-NC-SA
+			本授權條款允許使用者對本著作進行重混、調整，以及依原著作建立新著作，但僅限於非商業目的之使用。唯使用者就其新創著作，必須按照表彰
+			原作：國立臺北科技大學資訊工程系計算機圖學實驗室，並且將產出之新創著作採用相同的授權條款釋出。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="lib/jquery-2.1.3.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+</html>

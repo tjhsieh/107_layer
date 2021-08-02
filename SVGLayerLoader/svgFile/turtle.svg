@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+
+	<path d="M 500 600 L 250 450" style="stroke:blue;stroke-width:5;"/>
+	<path d="M 500 600 L 750 450" style="stroke:blue;stroke-width:5;"/>
+	<path d="M 500 600 L 500 900" style="stroke:blue;stroke-width:5;"/>
+	<circle cx="500" cy="900" r="50" stroke="pink" stroke-width="5" fill="none"></circle>
+	<circle cx="250" cy="450" r="50" stroke="pink" stroke-width="5" fill="none"></circle>
+	<circle cx="750" cy="450" r="50" stroke="pink" stroke-width="5" fill="none"></circle>
+	<path d="M 250 450 L 500 300" style="stroke:yellow;stroke-width:5;"/>	
+	<path d="M 500 300 L 750 450" style="stroke:yellow;stroke-width:5;"/>	
+	<path d="M 750 450 L 750 750" style="stroke:yellow;stroke-width:5;"/>
+	<path d="M 750 750 L 500 900" style="stroke:yellow;stroke-width:5;"/>	
+	<path d="M 500 900 L 250 750" style="stroke:yellow;stroke-width:5;"/>	
+	<path d="M 250 750 L 250 450" style="stroke:yellow;stroke-width:5;"/>			
+	<circle cx="500" cy="300" r="50" stroke="brown" stroke-width="5" fill="none"></circle>
+	<circle cx="250" cy="750" r="50" stroke="brown" stroke-width="5" fill="none"></circle>
+	<circle cx="750" cy="750" r="50" stroke="brown" stroke-width="5" fill="none"></circle>
+	<path d="M 500 300 L 500 600" style="stroke:red;stroke-width:5;"/>
+	<path d="M 500 600 L 250 750" style="stroke:red;stroke-width:5;"/>
+	<path d="M 500 600 L 750 750" style="stroke:red;stroke-width:5;"/>+
+	
+	<circle cx="500" cy="600" r="50" stroke="green" stroke-width="5" fill="none"></circle>
+
+	<circle cx="457" cy="575" r="2" stroke="blue" stroke-width="5" fill="blue"></circle>
+	<circle cx="543" cy="575" r="2" stroke="blue" stroke-width="5" fill="blue"></circle>
+	<circle cx="500" cy="650" r="2" stroke="blue" stroke-width="5" fill="blue"></circle>
+</svg>
+	 <!--Wan (0,0) (0,4s) (2s,4s) (2s,5s) (0,5s) (0,6s) (3s,6s) (3s,4s) (4s,4s) (4s,6s) (5s,6s) (5s,3s) (3s,3s) (3s,2s) (5s,2s) (5s,1s) (2s,1s) (2s,3s) (1s,3s) (1s,0)-->

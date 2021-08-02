@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+
+	<g id="wan">
+	<path d="M 100 0 H 600" style="fill:#f40;stroke:pink;stroke-width:4;" fill="#f40" />
+	<polyline points="0,0 0,400 200,400 200,500 0,500 0,600 300,600 300,400 400,400 400,600 500,600 500,300 300,300 300,200 500,200 500,100 200,100 200,300 100,300 100,0
+	 " style="fill:none;stroke:black;stroke-width:4;" fill="#f40"/>
+	</g>
+
+	<use xlink:href="#wan" x="600" y="0" fill="#0f5"/>
+	<use xlink:href="#wan" x="1200" y="0" fill="#09f"/>
+
+</svg>
+	 <!--Wan (0,0) (0,4s) (2s,4s) (2s,5s) (0,5s) (0,6s) (3s,6s) (3s,4s) (4s,4s) (4s,6s) (5s,6s) (5s,3s) (3s,3s) (3s,2s) (5s,2s) (5s,1s) (2s,1s) (2s,3s) (1s,3s) (1s,0)-->

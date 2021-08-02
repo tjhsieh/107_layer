@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>羅地龜紋自動生成與編輯</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../src/editorCSS.css">
+<body id="ediotrBody"> 
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<h1 id="editorTitle">羅地龜紋自動生成與編輯</h1>
+	<h3>
+		<button id="saveUI" onclick="uiShowHide(this.id)" style="background-image:url(../img/iconSave.svg); width:50px;height:50px;"></button>
+		<button id="traceUI" onclick="uiShowHide(this.id)" style="background-image:url(../img/iconTrace.svg); width:50px;height:50px;"></button>
+		<button id="editUI" onclick="uiShowHide(this.id)" style="background-image:url(../img/iconEdit.svg); width:50px;height:50px;"></button>
+		<button id="layerUI" onclick="uiShowHide(this.id)" style="background-image:url(../img/iconLayer.svg); width:50px;height:50px;"></button>
+	</h3>
+	<h3 id="saveLoadBlock" style="display: None">		
+		<text>儲存新檔 : </text>
+		<button onclick="saveSPE()">儲存SPE檔</button>
+		<button onclick="exportSVG()">儲存SVG檔</button>
+		<text>讀取舊檔 : </text>
+		<text> &nbsp &nbsp &nbsp 讀取SPE:</text><input type="file" onchange="loadSPE(event)"></input>
+		<text>匯入SVG:</text><input type="file" onchange="loadSVG(event)"></input>				
+	</h3>
+	<h3 id="loadTraceBlock" style="display: None">
+		<text>描圖背景:</text><input accept="image/*" id="uploadImage" type="file" onchange="tracingTargetChange(this)">		
+	</h3>
+	<div id="divForSlideBar">
+	<text>圓圈長度</text><input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
+	</div>
+	<h3 id="traceSettingBlock" style="display: None"><!-- style="border: solid;border-width:5;background-color:#C3C3C3"-->
+		<text>描圖移動 / 調整</text><!--tT = tracing Traget : 描圖-->
+		<text>X:</text><input type="text" size="5" id="tTX" value="0"></input>
+		<text>Y:</text><input type="text" size="5" id="tTY" value="0"></input>
+		<text>Width:</text><input type="text" size="5" id="tTWidth" value="0"></input>
+		<text>Height:</text><input type="text" size="5" id="tTHeight" value="0"></input>
+		<text>Opacity:</text><input type="text" size="5" id="tTOpacity" value="0.3"></input>
+		<button id="ttApplyBtn" onclick="applyTracingTarget()">應用至描圖</button>
+		<button onclick="clearTTSet()">清除位移與變形</button>
+		<button onclick="clearTracingTarget()" >清除描圖</button>
+	</h3>
+	<h3>
+	<text>拖曳功能:</text><label class="switch">
+	  <input id="dragModeCheck" type="checkbox" onchange="switchMode(this.id)">
+	  <span class="slider"></span>
+	</label>
+	<!--<text>點擊繪製:</text><label class="switch">
+	  <input id="clickCreateModeCheck" type="checkbox" onchange="switchMode(this.id)">
+	  <span class="slider"></span>
+	</label>-->
+	<text>拖曳繪製:</text><label class="switch">
+	  <input id="paintModeCheck" type="checkbox" onchange="switchMode(this.id)">
+	  <span class="slider" value="black"></span>
+	</label>	
+	</h3>
+	<h3 id="editLineInput"> <!--style="border: solid;border-width:5;background-color:#C3C3C3"-->
+		<text>Id:</text><text id="obsId"></text>
+		<text>Name:</text><input type="text" size="10" id="obsName"></input><br>
+		<text>X:</text><input type="text" size="5" id="obsX"></input>
+		<text>Y:</text><input type="text" size="5" id="obsY"></input>
+		<text>Width:</text><input type="text" size="5" id="obsWidth"></input>
+		<text>Height:</text><input type="text" size="5" id="obsHeight"></input>
+		<text>Rotate:</text><input type="text" size="5" id="obsRotate" value="0"></input>
+		<text>Color:</text><input id="obsColor" type="color" value="#000000" />
+		<br>
+		<text>StrokeWidth:</text><input type="text" size="5" id="obsStrokeWidth" value="0"></input>
+		<text>StrokeColor:</text><input  id="obsStrokeColor" type="color" value="#000000" />		
+		<br>
+		<button id="obsApplyBtn" onclick="applyShapeData()">應用至圖形</button>
+		<button onclick="clearFill()" >清空圖形填滿</button>
+		<button onclick="removeCube()">刪除該圖形</button>
+		<button onclick="clearSelect()" >清除選取</button>
+	</h3>	
+	<h3 id="layerLineUI" style="display: None">
+		<text>圖層序編輯 : </text>
+		<button onclick="raiseOneLayer()" >上拉一層</button>	
+		<button onclick="raiseToTop()" >拉至最上層</button>
+		<button onclick="raiseToBottom()" >拉至最下層</button>
+		<button onclick="autoChildCut()">子圖層切割</button>
+	</h3>
+	<h3 id="parentApplyLineUI" style="display: None">
+		<text>父屬性套用</text>
+		<text>X位移:</text><input type="text" size="5" id="parentX"></input>
+		<text>Y位移:</text><input type="text" size="5" id="parentY"></input>
+		<text>Width縮放(0~1):</text><input type="text" size="5" id="parentWidth"></input>
+		<text>Height縮放(0~1):</text><input type="text" size="5" id="parentHeight"></input>
+		<!--<text>Fill套用:</text><input type="color" size="5" id="parentFill"></input>-->
+		<button onclick="parentDataApply()" >應用至所有子層集</button>
+	</h3>
+	<h3 id="parentAddLineUI" style="display: None">
+		<text>父圖層添加 : 將</text>
+		<input type="text" size="10" id="customChildLayerName"></input>
+		<button onclick="createCustomParentLayer()" >加入父圖層:</button>
+		<input type="text" size="10" id="jointoParentLayerName"></input>
+	</h3>
+	<svg id="editLine" width="740" height="100">
+		<rect id="editLineBG" x="0" y="0" width="740" height="100" fill="None" stroke="black" stroke-width="5"/>
+		<rect id="selectStrokeForCube" x="10" y="10" width=80 height="80" fill="None" stroke="#AA0000" stroke-width="5"/>
+		<rect id="rectCreateIcon" x="20" y="20" width="60" height="60" fill="white" stroke="black" stroke-width="5" onclick="selectShape(this.id)"/>
+		<ellipse id="circleCreateIcon" cx="130" cy="50" rx="30" ry="30" fill="white" stroke="black" stroke-width="5" onclick="selectShape(this.id)"/>
+		<path id="edgeCreateIcon" d="M200 20 L230 80" stroke="black" stroke-width="10" onclick="selectShape(this.id)"/>
+	</svg><br>
+	<div id="divForBasicSVG" style="display: inline;">
+	<svg id="basicSVG" width="500" height="500" x="0" y="0">
+		<rect id="basicSVGBG" x="0" y="0" width="500" height="500" fill="None" stroke="black" stroke-width="5"/>
+	</svg>
+	</div>
+	<div id="divForLayerSVG" style="display: inline;">
+	<svg id="layerSVG" width="250" height="500">
+	<!--<svg id="basicSVG" width="500" height="500">-->
+		<rect id="layerSVGBG" x="0" y="0" width="250" height="500" fill="None" stroke="black" stroke-width="5"/>
+		<rect id="layerTopTitle" x="0" y="0" width="250" height="50" fill="black" stroke="black" stroke-width="5" onclick="resetLayerLineViewBox()"/>
+		<text id="layerTopTitleText" x="100" y="30" fill="white" style="font-size: 25;">Layer</text>
+	</svg>
+	</div>
+	<div id="divForRelationshipSVG" style="display: inline;">
+	<svg id="relationshipSVG" width="250" height="500" style="display: None">
+	<!--<svg id="basicSVG" width="500" height="500">-->
+		<rect id="relationshipSVGBG" x="0" y="0" width="250" height="500" fill="None" stroke="black" stroke-width="5"/>
+		<rect id="relationshipTopTitle" x="0" y="0" width="250" height="50" fill="black" stroke="black" stroke-width="5" onclick="resetParentLineViewBox()"/>
+		<text id="relationshipTopTitleText" x="65" y="30" fill="white" style="font-size: 25;">Relationship</text>
+	</svg>
+	</div>
+	<div id="divForFakeSVG" style="display: none;">
+		<svg id="fakeSVG">
+		</svg>
+	</div>
+	<script type="text/javascript" src="../lib/jquery-3.2.1.min.js"></script>	
+	<script type="text/javascript" src="../lib/d3.v3.min.js"></script>	
+	<script type="text/javascript" src="../lib/dat.gui.min.js"></script>
+	<script type="text/javascript" src="../src/layerOperation.js"></script>
+	<script type="text/javascript" src="../src/stringOperation.js"></script>
+	<script type="text/javascript" src="../src/relationshipOperation.js"></script>
+	<script type="text/javascript" src="../src/svgEditor.js"></script>
+	<script type="text/javascript" src="../src/backgroundSetting.js"></script>
+	<script type="text/javascript" src="../src/saveAndLoad.js"></script>
+	<script type="text/javascript" src="../src/guiSupport.js"></script>
+	<script type="text/javascript">
+		//用來讓enter的快速輸入起作用
+	document.onkeydown = checkKey;
+	function checkKey(e)
+	{//按下按鍵時觸發的
+    	//console.log(e.keyCode);//用來看到底按了什麼    
+    	e = e || window.event;
+    	if (e.keyCode === 13) 
+    	{
+    		var activeInput = document.activeElement.id;
+    		if(activeInput.indexOf("obs")!=-1)
+    		{
+    			document.getElementById("obsApplyBtn").click();
+    		}
+    		else if(activeInput.indexOf("tT")!=-1)//tT = tarcetarget
+    		{
+    			document.getElementById("ttApplyBtn").click();
+    		}    		  
+	    }
+	}
+	</script>
+</body>
+</html>
